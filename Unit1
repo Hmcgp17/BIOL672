@@ -1,0 +1,68 @@
+#HannahMcGuinness_Unit1_BIOL672.r
+
+#Packages intended for use
+library('ggplot2')
+library('reshape2')
+library('dplyr')
+
+#Datasets/tables intended for use in Unit 1
+
+#Create a dataset of 5000 random numbers from a normal dist
+rnorm(5000)
+#Assigning vector for random number dataset to determine mean, SD & histogram
+random_number <- rnorm (5000)
+#Calculating mean from random number dataset
+m <-- mean(random_number)
+#Calculating std of data set
+std <- sd(random_number)
+#open a pdf
+pdf('histo.pdf')
+
+#Make a histogram
+hist <- hist(random_number,
+             main = "Random Number Histogram" ,
+             xlab = "Values",
+             ylab = "Density")
+             lines(density(random_number), col = "red", lwd = 2)
+             
+#Fitting normal distribution to random number histogram
+             fit <- fitdistr(random_number, densfun="normal")
+             print(fit)
+
+#Define x and y values to use for normal curve
+m <- mean(random_number)
+sd <- std(random_number)
+x_values <- seq(min(random_number), max(random_number), length = 5000)
+y_values <- dnorm(x_values, mean = m, std = sd)
+y_values <- y_values * diff(hist$mids[1:2]) * length(random_number)
+
+#Create a histogram with a density line
+hist_data <- hist(data, breaks = X, main = "Histogram with Density Line and Fitted Model", xlab = "Value", ylab = "Frequency", col = "lightblue", border = "black")
+lines(density(data), col = "red", lwd = X)
+
+#Fitted normal distribution model
+curve(dnorm(x, mean = sample_mean, sd = sample_sd), add = TRUE, col = "blue", lwd = X)
+
+#Overlay normal curve on histogram
+lines(x_values, y_values, col = "yellow")
+#save histogram as a pdf
+# dev.off()
+#sink data into txt
+sink('desc.txt')
+m(random_number)
+sd(random_number)
+sink()
+
+#Creating a histogram from output of random dataset
+hist(random_number, breaks = X, probability = TRUE, main = "Histogram with Fitted Normal Curve")
+xlab = "Values", ylab = "Density")
+lines(density(random_number), col = "red", lwd = X)
+
+#Print sample statistics
+cat("Sample Mean:", sample_mean, "\n")
+cat("Sample Standard Deviation:", sample_sd, "\n")
+
+
+
+
+
